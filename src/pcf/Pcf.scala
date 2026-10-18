@@ -1,11 +1,11 @@
-package calc
+package pcf
 
 import parser.AbstractParser.analyse
 import evaluator.Evaluator.eval
 
 import java.io.{FileInputStream, InputStream}
 
-object Calc:
+object Pcf:
   def main(args: Array[String]): Unit =
     val in: InputStream =
       if args.isEmpty then

@@ -1,4 +1,4 @@
-grammar Calc;
+grammar Pcf;
 
 exp: NUMBER                     # Number
    | '(' OP exp exp ')'         # BinaryExp

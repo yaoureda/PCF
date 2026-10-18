@@ -5,12 +5,12 @@ import ast.Exp.*
 
 import scala.jdk.CollectionConverters.*
 
-class ASTVisitor extends CalcBaseVisitor[Exp] :
+class ASTVisitor extends PcfBaseVisitor[Exp] :
 
-  override def visitNumber(ctx: CalcParser.NumberContext): Exp =
+  override def visitNumber(ctx: PcfParser.NumberContext): Exp =
     Number(ctx.getText.toInt)
 
-  override def visitBinaryExp(ctx: CalcParser.BinaryExpContext): Exp =
+  override def visitBinaryExp(ctx: PcfParser.BinaryExpContext): Exp =
     val s = ctx.OP().getText
     val op = Op.parse(s)
     // ctx.term is a Java list, it is translated in a Scala list
@@ -22,7 +22,7 @@ class ASTVisitor extends CalcBaseVisitor[Exp] :
         visit(concreteExp)
     BinaryExp(op, exp1, exp2)
 
-  override def visitIfZero(ctx: CalcParser.IfZeroContext): Exp =
+  override def visitIfZero(ctx: PcfParser.IfZeroContext): Exp =
     val concreteExps = ctx.exp.asScala.toList
     val List(exp1, exp2, exp3) =
       for (concreteExp <- concreteExps) yield

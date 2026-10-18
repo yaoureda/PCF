@@ -11,13 +11,13 @@ public class ConcreteParser {
     public static ParseTree analyze(InputStream is) throws IOException {
         ANTLRInputStream input = new ANTLRInputStream(is);
         /* Basic connection to ANTLR (does not capture syntactic errors)
-        CalcLexer lexer = new CalcLexer(input);
+        PcfLexer lexer = new PcfLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CalcParser parser = new CalcParser(tokens);
+        PcfParser parser = new PcfParser(tokens);
          */
-        CalcLexer lexer = new ReportingCalcLexer(input);
+        PcfLexer lexer = new ReportingPcfLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CalcParser parser = new CalcParser(tokens);
+        PcfParser parser = new PcfParser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(new ErrorListener());
 
