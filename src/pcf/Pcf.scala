@@ -1,6 +1,6 @@
 package pcf
 
-import parser.AbstractParser.analyse
+import parserANTLR.AbstractParser.analyze
 import evaluator.Evaluator.eval
 
 import java.io.{FileInputStream, InputStream}
@@ -12,7 +12,7 @@ object Pcf:
         System.in
       else
         FileInputStream(args(0))
-    val exp = analyse(in)
+    val exp = analyze(in)
     println(s"==> ${eval(exp)}")
 
 
