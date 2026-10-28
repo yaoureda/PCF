@@ -10,6 +10,13 @@ class ASTVisitor extends PcfBaseVisitor[Exp] :
   override def visitNumber(ctx: PcfParser.NumberContext): Exp =
     Number(ctx.getText.toInt)
 
+  override def visitApp(ctx: PcfParser.AppContext): Exp =
+    val concreteExps = ctx.exp.asScala.toList
+    val List(func, arg) =
+      for (concreteExp <- concreteExps) yield
+        visit(concreteExp)
+    App(func, arg)
+
   override def visitBinaryExp1(ctx: PcfParser.BinaryExp1Context): Exp =
     val s = ctx.OP1().getText
     val op = Op.parse(s)
@@ -33,6 +40,11 @@ class ASTVisitor extends PcfBaseVisitor[Exp] :
       for (concreteExp <- concreteExps) yield
         visit(concreteExp)
     BinaryExp(op, exp1, exp2)
+
+  override def visitFun(ctx: PcfParser.FunContext): Exp =
+    val x = ctx.VAR().getText
+    val body = visit(ctx.exp())
+    Fun(x, body)
 
   override def visitParExp(ctx: PcfParser.ParExpContext): Exp =
     visit(ctx.exp())

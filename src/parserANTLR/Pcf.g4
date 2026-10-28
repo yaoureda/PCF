@@ -1,9 +1,11 @@
 grammar Pcf;
 
 exp: NUMBER                     # Number
+   | exp exp                    # App
    | exp OP1 exp                # BinaryExp1
    | exp OP2 exp                # BinaryExp2
    | '(' exp ')'                 # ParExp
+   | 'fun' VAR '->' exp          # Fun
    | 'ifz' exp 'then' exp 'else' exp   # IfZero
    | VAR                         # Var
    | 'let' VAR '=' exp 'in' exp    # Let
