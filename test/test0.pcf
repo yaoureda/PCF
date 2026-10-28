@@ -1,1 +1,1 @@
-(ifz 1 6 (* 7 2))
+let x = 1 in (let x = 2 in x) + x

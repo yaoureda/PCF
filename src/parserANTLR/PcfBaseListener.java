@@ -17,6 +17,18 @@ public class PcfBaseListener implements PcfListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterApp(PcfParser.AppContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitApp(PcfParser.AppContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParExp(PcfParser.ParExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -36,6 +48,18 @@ public class PcfBaseListener implements PcfListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumber(PcfParser.NumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFix(PcfParser.FixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFix(PcfParser.FixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -96,6 +120,18 @@ public class PcfBaseListener implements PcfListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfZero(PcfParser.IfZeroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFun(PcfParser.FunContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFun(PcfParser.FunContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

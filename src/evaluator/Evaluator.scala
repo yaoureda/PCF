@@ -5,7 +5,8 @@ import ast.Exp.*
 import ast.Op.*
 
 object Evaluator :
-  def eval(exp: Exp, e: Map[String, Int] = Map()): Int = exp match
+  private type Env = Map[String, Int]
+  def eval(exp: Exp, e: Env = Map()): Int = exp match
     case Number(value) => value
     case BinaryExp(op, e1, e2)  =>
       op match

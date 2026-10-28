@@ -18,6 +18,13 @@ public class PcfBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Pc
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitApp(PcfParser.AppContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitParExp(PcfParser.ParExpContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -26,6 +33,13 @@ public class PcfBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Pc
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitNumber(PcfParser.NumberContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFix(PcfParser.FixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -61,4 +75,11 @@ public class PcfBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Pc
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitIfZero(PcfParser.IfZeroContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFun(PcfParser.FunContext ctx) { return visitChildren(ctx); }
 }

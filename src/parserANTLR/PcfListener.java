@@ -8,6 +8,18 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface PcfListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by the {@code App}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterApp(PcfParser.AppContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code App}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitApp(PcfParser.AppContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ParExp}
 	 * labeled alternative in {@link PcfParser#exp}.
 	 * @param ctx the parse tree
@@ -31,6 +43,18 @@ public interface PcfListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNumber(PcfParser.NumberContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Fix}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFix(PcfParser.FixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Fix}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFix(PcfParser.FixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code BinaryExp1}
 	 * labeled alternative in {@link PcfParser#exp}.
@@ -91,4 +115,16 @@ public interface PcfListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfZero(PcfParser.IfZeroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Fun}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFun(PcfParser.FunContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Fun}
+	 * labeled alternative in {@link PcfParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFun(PcfParser.FunContext ctx);
 }
