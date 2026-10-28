@@ -67,3 +67,8 @@ class ASTVisitor extends PcfBaseVisitor[Exp] :
         visit(concreteExp)
     Let(x, exp1, exp2)
 
+  override def visitFix(ctx: PcfParser.FixContext): Exp =
+    val f = ctx.VAR().getText
+    val body = visit(ctx.exp())
+    Fix(f, body)
+

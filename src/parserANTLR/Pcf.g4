@@ -9,6 +9,7 @@ exp: NUMBER                     # Number
    | 'ifz' exp 'then' exp 'else' exp   # IfZero
    | VAR                         # Var
    | 'let' VAR '=' exp 'in' exp    # Let
+   | 'fix' VAR exp               # Fix
    ;
 
 NUMBER: '0' | [1-9][0-9]* ;

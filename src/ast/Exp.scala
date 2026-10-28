@@ -8,6 +8,7 @@ enum Exp:
   case IfZero(test: Exp, exp1: Exp, exp2: Exp)
   case Var(x: String)
   case Let(x: String, exp1: Exp, exp2: Exp)
+  case Fix(f: String, body: Exp)
 
 enum Op:
   case Plus, Minus, Multiply, Divide
