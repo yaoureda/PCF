@@ -1,3 +1,2 @@
-let minus = fun x -> fun y -> x - y in
-  let g = minus 68 in
-    g 2
+let multiply = fix m fun a -> fun b -> ifz a then 0 else b + m (a - 1) b in
+  multiply 3 4
