@@ -13,6 +13,7 @@ object Pcf:
       else
         FileInputStream(args(0))
     val exp = analyze(in)
-    println(s"==> ${eval(exp)}")
+    val typ = typer.Typer.eval(exp, Map())
+    println(s"==> ${eval(exp, Map())}:$typ")
 
 
