@@ -9,7 +9,7 @@ import evaluator.Evaluator.Value.Closure
 object Evaluator :
   enum Value:
     case IntVal(value: Int)
-    case Closure(x: String, body: Exp, env: Env)
+    case Closure(x: String, body: Exp, env: Map[String, Value])
 
   given int2Val: Conversion[Int, Value] = n => IntVal(n)
 
@@ -17,9 +17,7 @@ object Evaluator :
     case IntVal(n) => n
   }
 
-  case class IceCube(x: String, t: Exp, e: Env)
-
-  private type Env = Map[String, Value | IceCube]
+  private type Env = Map[String, Value]
 
   def eval(exp: Exp, e: Env = Map()): Value = exp match
     case Number(value) => value
@@ -44,20 +42,16 @@ object Evaluator :
         case IntVal(_) => eval(e2, e)
         case _ => throw new Exception(s"Expected integer: $t")
     case Var(x) =>
-      e.get(x) match
-        case Some(v: Value) => v
-        case Some(IceCube(y, t, env)) =>
-          val newEnv = env + (y -> IceCube(y, t, env))
-          eval(t, newEnv)
-        case None => throw new Exception(s"Unbound variable: $x")
+      e.getOrElse(x, throw new Exception(s"Variable $x not found in environment"))
     case Let(x, e1, e2) =>
       val v1 = eval(e1, e)
       val newEnv = e + (x -> v1)
       eval(e2, newEnv)
-    case Fix(f, body) =>
-      val newEnv = e + (f -> IceCube(f, body, e))
-      eval(body, newEnv)
     case _ => throw new Exception(s"Unexpected expression: $exp")
+
+
+
+
 
     
 

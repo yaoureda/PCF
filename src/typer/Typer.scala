@@ -1,11 +1,7 @@
 package typer
 
 import ast.Exp
-import ast.Exp.*
 import Exp.*
-import ast.Op.*
-import evaluator.Evaluator.Value.Closure
-import evaluator.Evaluator.eval
 import unify.TVar
 
 object Typer:
@@ -41,10 +37,4 @@ object Typer:
       val newEnv = e + (x -> A)
       val B = eval(e2, newEnv)
       B
-    case Fix(f, body) =>
-      val A = TVar()
-      val newEnv = e + (f -> A)
-      val B = eval(body, newEnv)
-      if A === B then B
-      else throw TypeError(exp.toString)
-    case _ => ???  
+    case _ => throw TypeError(s"Unsupported expression: $exp")
