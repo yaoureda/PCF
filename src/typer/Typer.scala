@@ -13,12 +13,12 @@ object Typer:
       val B = eval(arg, e)
       val C = TVar()
       if A === FUNCTION(B, C) then C
-      else throw TypeError(exp.toString)
+      else throw TypeError(s"Invalid function application: $exp")
     case BinaryExp(op, e1, e2)  =>
       val A = eval(e1, e)
       val B = eval(e2, e)
       if A === INT && B === INT then INT
-      else throw TypeError(exp.toString)
+      else throw TypeError(s"Arithmetic operation requires integers: $exp")
     case Fun(x, body) =>
       val A = TVar()
       val newEnv = e + (x -> A)
@@ -29,9 +29,9 @@ object Typer:
       val B = eval(e1, e)
       val C = eval(e2, e)
       if A === INT && B === C then B
-      else throw TypeError(exp.toString)
+      else throw TypeError(s"Invalid condition or incompatible branches: $exp")
     case Var(x) =>
-      e.getOrElse(x, throw TypeError(s"Unbound variable: $x"))
+      e.getOrElse(x, throw TypeError(s"Variable $x not found in environment"))
     case Let(x, e1, e2) =>
       val A = eval(e1, e)
       val newEnv = e + (x -> A)
