@@ -1,0 +1,1 @@
+ifz 0 then 10 else fun x -> x

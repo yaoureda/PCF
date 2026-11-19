@@ -1,0 +1,2 @@
+let multiply = fun a -> fun b -> a * b in
+  multiply 3 4
