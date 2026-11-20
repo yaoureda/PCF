@@ -1,0 +1,5 @@
+let more = 44 in
+let id = fun x -> x in
+let f = fun x -> id more
+in f 0
+

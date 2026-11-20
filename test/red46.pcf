@@ -1,0 +1,5 @@
+let y = 22 in
+let f22 = fun x -> y in
+let y = 33 in
+let f33 = fun x -> y in
+f22 0 + f33 0

@@ -5,8 +5,10 @@ import ast.Exp
 import java.io.InputStream
 
 object AbstractParser :
-  def analyze(in: InputStream): Exp =
+  def analyze(verbose: Boolean, in: InputStream): Exp =
     val concreteTree = ConcreteParser.analyze(in)
     val visitor = new ASTVisitor
-    visitor.visit(concreteTree).asInstanceOf[Exp]
+    val exp = visitor.visit(concreteTree)
+    if verbose then println(s"AST: $exp")
+    exp
  

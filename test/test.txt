@@ -1,0 +1,205 @@
+/Users/noye/Library/Java/JavaVirtualMachines/openjdk-25/Contents/Home/bin/java -Didea.launcher.port=51710 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/noye/Downloads/antlr-runtime-4.13.2.jar:/Users/noye/Documents/Teaching/FISE3/COMPIL/TP/workspace/PCF/out/production/PCF:/Users/noye/.ivy2/cache/org.scala-lang/scala3-library_3/jars/scala3-library_3-3.9.0.jar:/Users/noye/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-3.9.0.jar:/Users/noye/Documents/Teaching/FISE3/COMPIL/TP/workspace/PCF/lib/Unify.jar:/Users/noye/Library/Application Support/JetBrains/IntelliJIdea2026.3/plugins/java/lib/idea_rt.jar com.intellij.rt.execution.application.AppMainV2 test.test
+**********  test/green0.pcf
+ANTLR Syntax Tree: (term 0)
+AST: Number(0)
+==> IntVal(0)
+**********  test/green1.pcf
+ANTLR Syntax Tree: (term 42)
+AST: Number(42)
+==> IntVal(42)
+**********  test/green2.pcf
+ANTLR Syntax Tree: (term (term 1) - (term 2))
+AST: BinaryExp(Minus,Number(1),Number(2))
+==> IntVal(-1)
+**********  test/green3.pcf
+ANTLR Syntax Tree: (term ifz (term 0) then (term 1) else (term 2))
+AST: IfZero(Number(0),Number(1),Number(2))
+==> IntVal(1)
+**********  test/green4.pcf
+ANTLR Syntax Tree: (term ifz (term 1) then (term 1) else (term 2))
+AST: IfZero(Number(1),Number(1),Number(2))
+==> IntVal(2)
+**********  test/green5.pcf
+ANTLR Syntax Tree: (term (term (term 1) - (term 2)) - (term 3))
+AST: BinaryExp(Minus,BinaryExp(Minus,Number(1),Number(2)),Number(3))
+==> IntVal(-4)
+**********  test/green6.pcf
+ANTLR Syntax Tree: (term (term 1) + (term (term 2) * (term 3)))
+AST: BinaryExp(Plus,Number(1),BinaryExp(Multiply,Number(2),Number(3)))
+==> IntVal(7)
+**********  test/green7.pcf
+ANTLR Syntax Tree: (term ( (term 1) ))
+AST: Number(1)
+==> IntVal(1)
+**********  test/green8.pcf
+ANTLR Syntax Tree: (term (term ( (term (term 1) + (term 2)) )) * (term 3))
+AST: BinaryExp(Multiply,BinaryExp(Plus,Number(1),Number(2)),Number(3))
+==> IntVal(9)
+**********  test/green9.pcf
+ANTLR Syntax Tree: (term (term 4) / (term 2))
+AST: BinaryExp(Divide,Number(4),Number(2))
+==> IntVal(2)
+**********  test/blue0.pcf
+ANTLR Syntax Tree: (term let x = (term 11) in (term 22))
+AST: Let(x,Number(11),Number(22))
+==> IntVal(22)
+**********  test/blue1.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term x))
+AST: Let(x,Number(1),Var(x))
+==> IntVal(1)
+**********  test/blue2.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term (term x) + (term 1)))
+AST: Let(x,Number(1),BinaryExp(Plus,Var(x),Number(1)))
+==> IntVal(2)
+**********  test/blue3.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term let y = (term 2) in (term (term x) + (term y))))
+AST: Let(x,Number(1),Let(y,Number(2),BinaryExp(Plus,Var(x),Var(y))))
+==> IntVal(3)
+**********  test/blue4.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term let x = (term 2) in (term x)))
+AST: Let(x,Number(1),Let(x,Number(2),Var(x)))
+==> IntVal(2)
+**********  test/blue5.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term let x = (term (term x) + (term 1)) in (term x)))
+AST: Let(x,Number(1),Let(x,BinaryExp(Plus,Var(x),Number(1)),Var(x)))
+==> IntVal(2)
+**********  test/blue6.pcf
+ANTLR Syntax Tree: (term let x = (term let x = (term 1) in (term x)) in (term x))
+AST: Let(x,Let(x,Number(1),Var(x)),Var(x))
+==> IntVal(1)
+**********  test/blue7.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term (term ( (term let x = (term 2) in (term x)) )) + (term x)))
+AST: Let(x,Number(1),BinaryExp(Plus,Let(x,Number(2),Var(x)),Var(x)))
+==> IntVal(3)
+**********  test/blue8.pcf
+ANTLR Syntax Tree: (term z)
+AST: Var(z)
+class java.lang.Exception Variable z not found
+**********  test/blue9.pcf
+ANTLR Syntax Tree: (term let x = (term ( (term let y = (term 1) in (term y)) )) in (term y))
+AST: Let(x,Let(y,Number(1),Var(y)),Var(y))
+class java.lang.Exception Variable y not found
+**********  test/blue10.pcf
+ANTLR Syntax Tree: (term let cond = (term ifz (term (term 4) - (term 2)) then (term (term 3) - (term (term 2) * (term 2))) else (term 1)) in (term (term 2) / (term cond)))
+AST: Let(cond,IfZero(BinaryExp(Minus,Number(4),Number(2)),BinaryExp(Minus,Number(3),BinaryExp(Multiply,Number(2),Number(2))),Number(1)),BinaryExp(Divide,Number(2),Var(cond)))
+==> IntVal(2)
+**********  test/blue11.pcf
+ANTLR Syntax Tree: (term let x = (term 1) in (term (term ( (term let x = (term (term x) + (term 1)) in (term x)) )) + (term x)))
+AST: Let(x,Number(1),BinaryExp(Plus,Let(x,BinaryExp(Plus,Var(x),Number(1)),Var(x)),Var(x)))
+==> IntVal(3)
+**********  test/red0.pcf
+ANTLR Syntax Tree: (term fun x -> (term 11))
+AST: Fun(x,Number(11))
+==> Closure(x,Number(11),Map())
+**********  test/red1.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term 11)) )) (term 2))
+AST: App(Fun(x,Number(11)),Number(2))
+==> IntVal(11)
+**********  test/red2.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term (term x) + (term 12))) )) (term 10))
+AST: App(Fun(x,BinaryExp(Plus,Var(x),Number(12))),Number(10))
+==> IntVal(22)
+**********  test/red3.pcf
+ANTLR Syntax Tree: (term let inc = (term fun x -> (term (term x) + (term 1))) in (term (term inc) (term 32)))
+AST: Let(inc,Fun(x,BinaryExp(Plus,Var(x),Number(1))),App(Var(inc),Number(32)))
+==> IntVal(33)
+**********  test/red4.pcf
+ANTLR Syntax Tree: (term (term ( (term fun y -> (term let x = (term 5) in (term (term x) + (term y)))) )) (term 39))
+AST: App(Fun(y,Let(x,Number(5),BinaryExp(Plus,Var(x),Var(y)))),Number(39))
+==> IntVal(44)
+**********  test/red5.pcf
+ANTLR Syntax Tree: (term (term (term ( (term fun x -> (term fun y -> (term (term x) + (term y)))) )) (term 5)) (term 50))
+AST: App(App(Fun(x,Fun(y,BinaryExp(Plus,Var(x),Var(y)))),Number(5)),Number(50))
+==> IntVal(55)
+**********  test/red6.pcf
+ANTLR Syntax Tree: (term let minus = (term fun x -> (term fun y -> (term (term x) - (term y)))) in (term let g = (term (term minus) (term 68)) in (term (term g) (term 2))))
+AST: Let(minus,Fun(x,Fun(y,BinaryExp(Minus,Var(x),Var(y)))),Let(g,App(Var(minus),Number(68)),App(Var(g),Number(2))))
+==> IntVal(66)
+**********  test/red7.pcf
+ANTLR Syntax Tree: (term let id = (term fun x -> (term x)) in (term let inc = (term fun x -> (term (term x) + (term 1))) in (term (term (term id) (term inc)) (term 76))))
+AST: Let(id,Fun(x,Var(x)),Let(inc,Fun(x,BinaryExp(Plus,Var(x),Number(1))),App(App(Var(id),Var(inc)),Number(76))))
+==> IntVal(77)
+**********  test/red11.pcf
+ANTLR Syntax Tree: (term ifz (term 0) then (term 11) else (term ( (term fun x -> (term x)) )))
+AST: IfZero(Number(0),Number(11),Fun(x,Var(x)))
+==> IntVal(11)
+**********  test/red13.pcf
+ANTLR Syntax Tree: (term let id = (term ( (term fun x -> (term x)) )) in (term ifz (term ( (term (term id) (term 0)) )) then (term ( (term (term id) (term 1)) )) else (term ( (term (term id) (term 2)) ))))
+AST: Let(id,Fun(x,Var(x)),IfZero(App(Var(id),Number(0)),App(Var(id),Number(1)),App(Var(id),Number(2))))
+==> IntVal(1)
+**********  test/red14.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term ifz (term x) then (term 22) else (term x))) )) (term 11))
+AST: App(Fun(x,IfZero(Var(x),Number(22),Var(x))),Number(11))
+==> IntVal(11)
+**********  test/red15.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term ifz (term x) then (term 22) else (term x))) in (term (term f) (term 11)))
+AST: Let(f,Fun(x,IfZero(Var(x),Number(22),Var(x))),App(Var(f),Number(11)))
+==> IntVal(11)
+**********  test/red16.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term ifz (term x) then (term fun y -> (term y)) else (term fun z -> (term 1)))) in (term (term (term f) (term 0)) (term 16)))
+AST: Let(f,Fun(x,IfZero(Var(x),Fun(y,Var(y)),Fun(z,Number(1)))),App(App(Var(f),Number(0)),Number(16)))
+==> IntVal(16)
+**********  test/red17.pcf
+ANTLR Syntax Tree: (term let y = (term 1) in (term let add = (term fun x -> (term (term x) + (term y))) in (term let y = (term 2) in (term (term add) (term 1)))))
+AST: Let(y,Number(1),Let(add,Fun(x,BinaryExp(Plus,Var(x),Var(y))),Let(y,Number(2),App(Var(add),Number(1)))))
+==> IntVal(2)
+**********  test/red18.pcf
+ANTLR Syntax Tree: (term let id = (term fun x -> (term x)) in (term let test1 = (term (term id) (term 0)) in (term let test2 = (term (term id) (term id)) in (term 0))))
+AST: Let(id,Fun(x,Var(x)),Let(test1,App(Var(id),Number(0)),Let(test2,App(Var(id),Var(id)),Number(0))))
+==> IntVal(0)
+**********  test/red19.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term x)) )) (term fun x -> (term x)))
+AST: App(Fun(x,Var(x)),Fun(x,Var(x)))
+==> Closure(x,Var(x),Map())
+**********  test/red40.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term 1)) in (term let g = (term fun y -> (term 2)) in (term 3)))
+AST: Let(f,Fun(x,Number(1)),Let(g,Fun(y,Number(2)),Number(3)))
+==> IntVal(3)
+**********  test/red41.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term 1)) in (term let g = (term fun y -> (term 2)) in (term (term g) (term 3))))
+AST: Let(f,Fun(x,Number(1)),Let(g,Fun(y,Number(2)),App(Var(g),Number(3))))
+==> IntVal(2)
+**********  test/red42.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term 1)) in (term let g = (term fun y -> (term 2)) in (term (term (term f) (term 4)) + (term (term g) (term 3)))))
+AST: Let(f,Fun(x,Number(1)),Let(g,Fun(y,Number(2)),BinaryExp(Plus,App(Var(f),Number(4)),App(Var(g),Number(3)))))
+==> IntVal(3)
+**********  test/red43.pcf
+ANTLR Syntax Tree: (term let f = (term fun x -> (term 1)) in (term let g = (term fun y -> (term 2)) in (term (term (term f) (term 4)) - (term (term g) (term 3)))))
+AST: Let(f,Fun(x,Number(1)),Let(g,Fun(y,Number(2)),BinaryExp(Minus,App(Var(f),Number(4)),App(Var(g),Number(3)))))
+==> IntVal(-1)
+**********  test/red44.pcf
+ANTLR Syntax Tree: (term let more = (term 44) in (term let id = (term fun x -> (term x)) in (term let f = (term fun x -> (term (term id) (term more))) in (term (term f) (term 0)))))
+AST: Let(more,Number(44),Let(id,Fun(x,Var(x)),Let(f,Fun(x,App(Var(id),Var(more))),App(Var(f),Number(0)))))
+==> IntVal(44)
+**********  test/red45.pcf
+ANTLR Syntax Tree: (term let y = (term 33) in (term let f = (term fun x -> (term y)) in (term let y = (term 22) in (term let x = (term (term f) (term 0)) in (term y)))))
+AST: Let(y,Number(33),Let(f,Fun(x,Var(y)),Let(y,Number(22),Let(x,App(Var(f),Number(0)),Var(y)))))
+==> IntVal(22)
+**********  test/red46.pcf
+ANTLR Syntax Tree: (term let y = (term 22) in (term let f22 = (term fun x -> (term y)) in (term let y = (term 33) in (term let f33 = (term fun x -> (term y)) in (term (term (term f22) (term 0)) + (term (term f33) (term 0)))))))
+AST: Let(y,Number(22),Let(f22,Fun(x,Var(y)),Let(y,Number(33),Let(f33,Fun(x,Var(y)),BinaryExp(Plus,App(Var(f22),Number(0)),App(Var(f33),Number(0)))))))
+==> IntVal(55)
+**********  test/red47.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term (term ( (term let x = (term (term x) + (term 1)) in (term x)) )) + (term x))) )) (term 1))
+AST: App(Fun(x,BinaryExp(Plus,Let(x,BinaryExp(Plus,Var(x),Number(1)),Var(x)),Var(x))),Number(1))
+==> IntVal(3)
+**********  test/red48.pcf
+ANTLR Syntax Tree: (term (term ( (term fun x -> (term (term (term ( (term fun x -> (term x)) )) (term ( (term (term x) + (term 1)) ))) + (term x))) )) (term 1))
+AST: App(Fun(x,BinaryExp(Plus,App(Fun(x,Var(x)),BinaryExp(Plus,Var(x),Number(1))),Var(x))),Number(1))
+==> IntVal(3)
+**********  test/black0.pcf
+ANTLR Syntax Tree: (term let count = (term fix f (term fun n -> (term ifz (term n) then (term 0) else (term (term f) (term ( (term (term n) - (term 1)) )))))) in (term (term count) (term 0)))
+AST: Let(count,Fix(f,Fun(n,IfZero(Var(n),Number(0),App(Var(f),BinaryExp(Minus,Var(n),Number(1)))))),App(Var(count),Number(0)))
+Exception in thread "main" scala.NotImplementedError: an implementation is missing
+	at scala.Predef$.$qmark$qmark$qmark(Predef.scala:396)
+	at evaluator.Evaluator$.eval(Evaluator.scala:38)
+	at evaluator.Evaluator$.eval(Evaluator.scala:27)
+	at pcf.PCF$.main(PCF.scala:22)
+	at test.Test$package$.test(Test.scala:71)
+	at test.Test$package$.test(Test.scala:57)
+	at test.test.main(Test.scala:5)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at com.intellij.rt.execution.application.AppMainV2.main(AppMainV2.java:105)
+
+Process finished with exit code 1
